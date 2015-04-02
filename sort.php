@@ -11,11 +11,11 @@ for ($i=0; $i < $count; $i++) {
 /*$f = fopen( "./array-9999.txt", "w+");
 $ser = serialize( $array);
 fputs( $f, $ser);*/
-//$array = array(9,8,7,5,6,2,3);
+
 
 $f = fopen( "./array-400.txt", "r");
 $array = unserialize(fgets( $f ));
-
+//$array = array(9,8,7,5,6,2,3);
 $selectionSort = $array;
 $insSort = $array;
 $mergeSort = $array;
@@ -50,10 +50,9 @@ printf('<br />Затрачено %.4F сек. на сортировку выбо
 $start = microtime(true);
 for ( $i = 1; $i < $count; $i++) { 
 	$key = $insSort[$i];
-	$j = $i - 1;
-	while ( $j >= 0 && $insSort[$j]> $key ) {
+//	$j = $i - 1;
+	for( $j = $i - 1; $j >= 0 && $insSort[$j]> $key; $j-- ) {
 		$insSort[$j+1] = $insSort[$j];
-		$j--;
 	}
 	$insSort[$j+1] = $key;
 }
@@ -69,7 +68,7 @@ mergeSort( $mergeSort, 0, $count - 1 );
 $finish_time = microtime(true); 
 $result_time = $finish_time - $start;
 printf('<br />Затрачено %.4F сек. на сортировку слиянием, при размере массива %s', $result_time, $count);
-echo "<pre>"; print_r( $mergeSort);
+//echo "<pre>"; print_r( $mergeSort);
 
 
 function mergeSort( &$mergeSort, $p, $r ){
