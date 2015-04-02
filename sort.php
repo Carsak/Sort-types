@@ -19,10 +19,11 @@ $array = unserialize(fgets( $f ));
 $selectionSort = $array;
 $insSort = $array;
 $mergeSort = $array;
+$quickSort = $array;
 $count = count( $array );
 
 
-
+/*
 // Selection Sort
 
 $start = microtime(true);
@@ -68,8 +69,10 @@ mergeSort( $mergeSort, 0, $count - 1 );
 $finish_time = microtime(true); 
 $result_time = $finish_time - $start;
 printf('<br />Затрачено %.4F сек. на сортировку слиянием, при размере массива %s', $result_time, $count);
-//echo "<pre>"; print_r( $mergeSort);
+//echo "<pre>"; print_r( $mergeSort);*/
 
+quickSort( $quickSort, 0, $count - 1  );
+echo "<pre>"; print_r( $quickSort);
 
 function mergeSort( &$mergeSort, $p, $r ){
 	if ( $p >= $r) {
@@ -108,4 +111,27 @@ function merge( &$mergeSort, $p, $q, $r){
 	}
 }
 
+function quickSort( &$quickSort, $p, $r){
+	if( $p >= $r){
+		return true;
+	}
+	$q = partition( $quickSort, $p, $r );
+	quickSort( $quickSort, $p, $q -1 );
+	quickSort( $quickSort, $q + 1, $r );
+}
+function partition( &$quickSort, $p, $r ){
+	$q = $p;
+	for( $u = $p; $u < $r; $u++ ){
+		if($quickSort[$u] <= $quickSort[$r]){
+			$tmp = $quickSort[$q];
+			$quickSort[$q] = $quickSort[$u];
+			$quickSort[$u] = $tmp;
+			$q++;
+		}
+	}
+	$tmp1 = $quickSort[$q];
+	$quickSort[$q] = $quickSort[$r];
+	$quickSort[$r] = $tmp1;
+	return $q;
+}
 ?>
